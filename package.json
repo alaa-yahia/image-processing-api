@@ -4,11 +4,12 @@
   "description": "This project aims to give you a real-world scenario in which you would read and write to your disk via a Node.js express server rather than a database. The project you create serves two purposes: to prepare you for setting up scalable code and architecture for real-world projects and tie together some of the most popular middleware and utilities found in Node.js projects. This project barely touches the surface of what is possible but will prove your ability to use what you’ve learned in real-world scenarios.",
   "main": "",
   "scripts": {
-    "start:server": "ts-node server/index.ts",
+    "start:server": "nodemon server/index.ts",
     "build": "npx tsc",
     "lint": "eslint '**/*.ts'",
     "prettier": "prettier --config .prettierrc '**/*.ts' --write",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "jasmine": "jasmine",
+    "test": "npm run build && npm run jasmine"
   },
   "author": "Alaa Yahia",
   "license": "ISC",
@@ -19,16 +20,20 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
+    "@types/jasmine": "^4.3.0",
     "@types/node": "^18.11.3",
     "@types/sharp": "^0.31.0",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jasmine": "^4.4.0",
+    "jasmine-spec-reporter": "^7.0.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
+    "supertest": "^6.3.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4"
   }

@@ -1,6 +1,6 @@
 {
   "includes": ["server/**/*"],
-  "exclude": ["node_modules", "tests"],
+  "exclude": ["node_modules", "spec", "dist"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "commonjs",

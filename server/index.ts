@@ -1,18 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import sharp from 'sharp';
+import routes from './routes';
 
 dotenv.config();
-const app = express();
-
 const port = process.env.PORT;
 
-app.get('/api', (req, res) => {
-  const { fileName } = req.query;
-
-  res.send('Hello, world!');
-});
+const app = express();
+app.use('/api', routes);
 
 app.listen(port, () => {
   console.log(`server started at localhost:${port}`);
 });
+
+export default app;

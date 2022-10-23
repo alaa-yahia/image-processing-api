@@ -8,7 +8,7 @@ routes.get('/images', async (req, res) => {
   const { filename, height, width } = req.query;
 
   const filePath = `images/${filename}.jpg`;
-  const thumbFilePath = `images/thumb/${filename}-thumb.jpg`;
+  const thumbFilePath = `images/thumb/${filename}-thumb-${width}-${height}.jpg`;
 
   if (!filename) {
     return res.status(400).send('Please provide a file name in URL query');

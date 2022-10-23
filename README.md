@@ -1,4 +1,4 @@
 # Image Processing API
 
-Resizing images
-Serving cached images
+* Resizing images
+* Serving cached images

@@ -1,10 +1,12 @@
 {
+  "includes": ["server/**/*"],
+  "exclude": ["node_modules", "tests"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "commonjs",
     "outDir": "./dist",
     "strict": true,
-    "noImplicitAny": true
-  },
-  "exclude": ["node_modules", "tests"]
+    "noImplicitAny": true,
+    "esModuleInterop": true
+  }
 }

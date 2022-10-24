@@ -6,9 +6,6 @@ export const resizeImg = async (
   height: number,
   thumbFilePath: string
 ) => {
-  if (!width || !height) {
-    return null;
-  }
   return await sharp(filePath)
     .resize(width, height)
     .jpeg({ mozjpeg: true })

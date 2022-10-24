@@ -12,6 +12,13 @@ routes.get('/images', async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
+  if (!Number(width) || !Number(height)) {
+    res
+      .status(400)
+      .send('Maybe You forgot to provide a width or a height in URL query');
+    return;
+  }
+
   const filePath = `images/${filename}.jpg`;
   const thumbFilePath = `images/thumb/${filename}-thumb-${width}-${height}.jpg`;
 
@@ -35,20 +42,16 @@ routes.get('/images', async (req: Request, res: Response): Promise<void> => {
     );
 
     if (!data) {
-      res
-        .status(400)
-        .send(
-          'Maybe You forgot to provide a width or a height in URL query or it is an internal server error'
-        );
+      res.status(400).send('Error while processing image occurred');
       return;
     }
 
     res.status(200).sendFile(`${process.cwd() + '/' + thumbFilePath}`);
     return;
-  } else {
-    res.status(400).send("Provided file name doesn't exist on this server");
-    return;
   }
+
+  res.status(400).send("Provided file name doesn't exist on this server");
+  return;
 });
 
 export default routes;

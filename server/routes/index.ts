@@ -7,13 +7,13 @@ const routes = express.Router();
 routes.get('/images', async (req: Request, res: Response): Promise<void> => {
   const { filename, height, width } = req.query;
 
-  const filePath = `images/${filename}.jpg`;
-  const thumbFilePath = `images/thumb/${filename}-thumb-${width}-${height}.jpg`;
-
   if (!filename) {
     res.status(400).send('Please provide a file name in URL query');
     return;
   }
+
+  const filePath = `images/${filename}.jpg`;
+  const thumbFilePath = `images/thumb/${filename}-thumb-${width}-${height}.jpg`;
 
   if (existsSync(thumbFilePath)) {
     const metadata = await fileMeta(thumbFilePath);

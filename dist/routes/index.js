@@ -10,22 +10,33 @@ const routes = express_1.default.Router();
 routes.get('/images', async (req, res) => {
     const { filename, height, width } = req.query;
     const filePath = `images/${filename}.jpg`;
-    const thumbFilePath = `images/thumb/${filename}-thumb.jpg`;
+    const thumbFilePath = `images/thumb/${filename}-thumb-${width}-${height}.jpg`;
     if (!filename) {
-        return res.sendStatus(400);
+        res.status(400).send('Please provide a file name in URL query');
+        return;
     }
     if ((0, fs_1.existsSync)(thumbFilePath)) {
         const metadata = await (0, util_1.fileMeta)(thumbFilePath);
-        if (metadata.height === height && metadata.width === width) {
-            return res.status(200).sendFile(process.cwd() + '/' + thumbFilePath);
+        if (metadata.height === Number(height) &&
+            metadata.width === Number(width)) {
+            res.status(200).sendFile(process.cwd() + '/' + thumbFilePath);
+            return;
         }
     }
     if ((0, fs_1.existsSync)(filePath)) {
         const data = await (0, util_1.resizeImg)(filePath, Number(width), Number(height), thumbFilePath);
         if (!data) {
-            return res.sendStatus(500);
+            res
+                .status(400)
+                .send('Maybe You forgot to provide a width or a height in URL query or it is an internal server error');
+            return;
         }
-        return res.status(200).sendFile(`${process.cwd() + '/' + thumbFilePath}`);
+        res.status(200).sendFile(`${process.cwd() + '/' + thumbFilePath}`);
+        return;
+    }
+    else {
+        res.status(400).send("Provided file name doesn't exist on this server");
+        return;
     }
 });
 exports.default = routes;
